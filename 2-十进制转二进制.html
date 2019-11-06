@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>十进制转二进制</title>
+</head>
+<body>
+  <script>
+    function Stack() {
+      //栈的属性
+      this.items = [];
+
+      //栈常见的相关操作
+      //1、压栈
+      Stack.prototype.push = function(element) {
+        this.items.push(element);
+      }
+      //2、出栈
+      Stack.prototype.pop = function() {
+        return this.items.pop();
+      }
+      //3、查看栈顶元素
+      Stack.prototype.peek = function() {
+        return this.items[this.items.length-1];
+      }
+      //4、判断栈是否为空
+      Stack.prototype.isEmpty = function() {
+        return this.items.length === 0;
+      }
+      //5、栈中元素个数
+      Stack.prototype.size = function() {
+        return this.items.length;
+      }
+      //6、toString方法
+      Stack.prototype.mytoString = function() {
+        for(var i of this.items){
+          i +=  '';
+        }
+      }
+    }
+    function dec2bin(decNum) {
+      //实例化栈对象
+      var stack = new Stack();
+
+      while(decNum > 0) {
+        //取余，入栈
+        stack.push(decNum % 2);
+        //向下取整
+        decNum = Math.floor(decNum / 2);
+      }
+      //字符串拼接
+      var binNum = '';
+      while(!stack.isEmpty()){ 
+        binNum += stack.pop();
+      }
+      return binNum;
+    }
+    //测试
+    console.log('10的二进制：' + dec2bin(10)); //1010
+    console.log('100的二进制：' + dec2bin(100));//1100100
+    
+  </script>
+</body>
+</html>
