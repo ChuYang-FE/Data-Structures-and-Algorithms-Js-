@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3-js数组实现队列</title>
+</head>
+<body>
+  <script>
+    function Queue() {
+      this.items = [];
+      //入队
+      Queue.prototype.enQueue = function(ele) {
+        this.items.push(ele);
+      }
+      //出队
+      Queue.prototype.deQueue = function() {
+        this.items.shift();
+      }
+      //队头
+      Queue.prototype.head = function() {
+        return this.items[0];
+      }
+      //队列长度
+      Queue.prototype.size = function() {
+        return this.items.length;
+      }
+      //队空
+      Queue.prototype.isEmpty = function() {
+        return this.items.length === 0;
+      }
+      //字符串
+      Queue.prototype.toString = function() {
+        for(var i of this.items){
+          i +=  '';
+        }
+      }
+    }
+    var q = new Queue();
+    q.enQueue(1);
+    q.enQueue(2);
+    q.deQueue();
+    q.enQueue(3);
+    console.log('队头元素：' + q.head());
+    console.log('队列长度：' + q.size());
+    console.log('队列是否为空：' + q.isEmpty());
+  </script>
+</body>
+</html>
