@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>队列实现击鼓传花</title>
+</head>
+<body>
+  <script>
+    function Queue() {
+      this.items = [];
+      //入队
+      Queue.prototype.enQueue = function(ele) {
+        this.items.push(ele);
+      }
+      //出队
+      Queue.prototype.deQueue = function() {
+        return this.items.shift();
+      }
+      //队头
+      Queue.prototype.head = function() {
+        return this.items[0];
+      }
+      //队列长度
+      Queue.prototype.size = function() {
+        return this.items.length;
+      }
+      //队空
+      Queue.prototype.isEmpty = function() {
+        return this.items.length === 0;
+      }
+      //字符串
+      Queue.prototype.toString = function() {
+        var resultString = '';
+        for(var i = 0; i<this.items.length; i++){
+          resultString += this.items[i] + ' ';
+        }
+        return resultString;
+      }
+    }
+
+    //击鼓传花，输出最后胜者的名字，和他的下标
+    function passGame(nameList, num) {
+      //创建队列结构
+      var queue = new Queue();
+      //所有人加入队列
+      for(var i = 0; i < nameList.length; i++) {
+        queue.enQueue(nameList[i]);
+      }
+      //数数
+      while(queue.size() > 1) {
+        for(var i = 0; i < num - 1; i++){
+          queue.enQueue(queue.deQueue());         
+        }
+        queue.deQueue();
+      }
+      console.log('队列长度：' + queue.size());
+      var endName = queue.head();
+      console.log('胜者是：' + endName);
+      return nameList.indexOf(endName);
+    }
+    var names = ['Young', 'Tan', 'Chu', 'Young', 'TCY'];
+    passGame(names, 3);
+  </script>
+</body>
+</html>
