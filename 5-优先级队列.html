@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>优先级队列</title>
+</head>
+<body>
+  <script>
+    function PriorityQueue() {
+      //内部类
+      function QueueElement(ele, priority) {
+        this.ele = ele;
+        this.priority = priority;
+      }
+      //封装属性
+      this.items = [];
+      //实现插入方法
+      PriorityQueue.prototype.enqueue = function(ele, priority) {
+        //创建QueueElement对象
+        var queueElement = new QueueElement(ele, priority);
+        //判断队列是否为空
+        if (this.items.length == 0) {
+          this.items.push(queueElement);
+        } else {
+          var added = false;
+          for (var i = 0; i < this.items.length; i++) {
+            if (queueElement.priority < this.items[i].priority) {
+              this.items.splice(i, 0, queueElement);
+              added = true;
+              break;
+            }            
+          }
+          if (!added) {
+            this.items.push(queueElement);
+          }
+        }
+      }
+      //出队
+      PriorityQueue.prototype.deQueue = function() {
+        return this.items.shift();
+      }
+      //队头
+      PriorityQueue.prototype.head = function() {
+        return this.items[0];
+      }
+      //队列长度
+      PriorityQueue.prototype.size = function() {
+        return this.items.length;
+      }
+      //队空
+      PriorityQueue.prototype.isEmpty = function() {
+        return this.items.length === 0;
+      }
+      //字符串
+      PriorityQueue.prototype.toString = function() {
+        var resultString = '';
+        for(var i = 0; i<this.items.length; i++){
+          resultString += this.items[i] + ' ';
+        }
+        return resultString;
+      }
+    }
+    var priorityQueue = new PriorityQueue();
+    priorityQueue.enqueue('a',1);
+    priorityQueue.enqueue('a',2);
+    priorityQueue.enqueue('b',55);
+    priorityQueue.enqueue('c',22);
+    priorityQueue.enqueue('d',6);
+    
+    //打印查看结果
+    for(var i = 0; i < priorityQueue.items.length; i++){
+      console.log(priorityQueue.items[i].ele + '-' + priorityQueue.items[i].priority);
+    }
+    
+  </script>
+</body>
+</html>
