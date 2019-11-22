@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>update方法</title>
+    <title>update方法、removeAt方法、remove方法、isEmpty方法、size方法</title>
   </head>
   <body>
     <script>
@@ -98,11 +98,11 @@
           var index = 0;
           var current = this.head;
           while (current) {
-            if(current.data === data){
+            if (current.data === data) {
               return index;
             }
             current = current.next;
-            index++;                       
+            index++;
           }
           return -1;
         };
@@ -120,6 +120,43 @@
           //修改data
           current.data = newData;
           return true;
+        };
+
+        //removeAt方法
+        LinkedList.prototype.removeAt = function(position) {
+          if (position < 0 || position >= this.length) {
+            return null;
+          }
+          var current = this.head;
+          if (position == 0) {
+            this.head = this.head.next;
+          } else {
+            var index = 0;
+            var previous = null;
+            while (index++ < position) {
+              previous = current;
+              current = current.next;
+            }
+            previous.next = current.next;
+          }
+          //移除后，记得长度—1
+          this.length--;
+          return current.data;
+        };
+
+        //remove方法，根据元素移除对应节点
+        LinkedList.prototype.remove = function(data) {
+          var index = this.indexOf(data);
+          return this.removeAt(index);
+        }
+
+        //isEmpty方法、size方法
+        LinkedList.prototype.isEmpty = function() {
+          return this.length == 0;
+        }
+
+        LinkedList.prototype.size = function() {
+          return this.length;
         }
       }
 
@@ -130,8 +167,13 @@
       list.append(666);
       list.append(888);
       alert(list);
-      list.update(0, 10101010101010)
+      list.update(0, 111);
       alert(list);
+      list.removeAt(3);
+      alert(list);
+      list.remove('nba');
+      alert(list);
+      alert('list是否为空：'+ list.isEmpty() + ' list长度：' + list.size());
     </script>
   </body>
 </html>
