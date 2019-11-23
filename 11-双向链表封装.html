@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双向链表封装</title>
+</head>
+<body>
+  <script>
+    // 创建双向链表的构造函数
+    function DoublyLinkedList() {
+      //内部类：节点类
+      function Node(data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+      }
+      //属性
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+
+      //1、append方法
+      DoublyLinkedList.prototype.append = function(data) {
+        //创建节点
+        var newNode = new Node(data);
+        //判断是否为空
+        if(this.head == null) {
+          this.head = newNode;
+          this.tail = newNode;
+        } else {
+          this.tail.next = newNode;
+          newNode.prev = this.tail;
+          this.tail = newNode;
+        }
+        //长度+1
+        this.length++;
+      }
+
+      //2、将链表转成字符串的方法
+      //2.1 toString方法(默认从旧到新)
+      DoublyLinkedList.prototype.toString = function() {
+        return this.forwardString();
+      }
+
+      //2.2 forwardString方法：从旧到新
+      DoublyLinkedList.prototype.forwardString = function() {
+        //1.定义变量
+        var current = this.head;
+        var resultString = '';
+        while(current) {
+          resultString += current.data + ' ';
+          current = current.next;
+        }
+        return resultString;
+      }
+
+      //2.3 backString方法：从新到旧
+      DoublyLinkedList.prototype.backString = function() {
+        var current = this.tail;
+        var resultString = '';
+        while(current) {
+          resultString += current.data + ' ';
+          current = current.prev;
+        }
+        return resultString;
+      }
+    }
+
+    //测试代码
+    var list = new DoublyLinkedList();
+    list.append('a');
+    list.append('b');
+    list.append('c');
+    list.append(4);
+
+    alert(list.forwardString());
+    alert(list.backString())
+    
+  </script>
+</body>
+</html>
