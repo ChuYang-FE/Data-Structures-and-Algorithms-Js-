@@ -12,3 +12,4 @@ Data Structures and Algorithms -- JavaScript Version
 # 9-链表get方法、indexOf方法
 # 10-链表update方法
 # 11-双向链表封装、append方法、toString方法（forwardString、backString）
+# 12-双向链表insert方法
