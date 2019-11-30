@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>双向链表removeAt</title>
+    <title>14-双向链表removeAt、remove、及其他方法</title>
   </head>
   <body>
     <script>
@@ -175,6 +175,29 @@
           this.length--;
           return true;
         };
+
+        //remove方法
+        DoublyLinkedList.prototype.remove = function(data) {
+          var index = this.indexOf(data);
+          return this.removeAt(index);
+        }
+
+        //isEmpty、size方法
+        DoublyLinkedList.prototype.isEmpty = function() {
+          return this.length == 0;
+        }
+        DoublyLinkedList.prototype.size = function() {
+          return this.length;
+        }
+
+        //获取链表第一个元素
+        DoublyLinkedList.prototype.getHead = function() {
+          return this.head.data;
+        }
+        //获取链表最后一个元素
+        DoublyLinkedList.prototype.getTail = function() {
+          return this.tail.data;
+        }
       }
 
       //测试代码
@@ -183,13 +206,16 @@
       list.append("b");
       list.append("c");
       list.append(4);
-      alert(list);
+      alert(list + '，' + 'head：' + list.getHead() + '，' + 'tail：' + list.getTail());
       alert("目前长度：" + list.length);
       list.removeAt(1);
-      alert(list);
+      alert('移除索引为1的值后' + list);
       list.removeAt(0);
-      alert(list);
+      alert('移除索引为0的值后' + list);
       alert("目前长度：" + list.length);
+      list.remove(4);
+      alert('移除4后：' + list);
+      alert('是否为空：' + list.isEmpty() + '链表的size是：' + list.size());
     </script>
   </body>
 </html>
