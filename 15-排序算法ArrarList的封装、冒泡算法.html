@@ -14,7 +14,7 @@
         this.array.push(item);
       }
       ArrayList.prototype.toString = function() {
-        return this.array.join('-');
+        return this.array.join(' ');
       }
 
       //因为这个交换非常常用，所以直接提取出来。
@@ -27,10 +27,21 @@
       //冒泡算法
       ArrayList.prototype.bubbleSort = function() {
         let length = this.array.length;
-        for(let j = length - 1; j > 0; j--) {
-          for(let i = 0; i < j; i++) {
-            if(this.array[i] > this.array[i+1]) {
-              this.swap(i, i+1);
+
+        //视频方法
+        // for(let j = length - 1; j >= 0; j--) {
+        //   for(let i = 0; i < j; i++) {
+        //     if(this.array[i] > this.array[i+1]) {
+        //       this.swap(i, i+1);
+        //     }
+        //   }
+        // }
+
+        //额外补充
+        for(let i = 0; i < length - 1; i++) {
+          for(let j = 0; j < length - 1 - i; j++) {
+            if(this.array[j] > this.array[j+1]) {
+              this.swap(j, j+1);
             }
           }
         }
@@ -45,7 +56,8 @@
     list.insert(8);
     list.insert(-1);
     
-    alert(list.bubbleSort());
+    list.bubbleSort();
+    alert(list)
   </script>
 </body>
 </html>
