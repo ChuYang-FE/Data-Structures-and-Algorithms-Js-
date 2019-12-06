@@ -13,3 +13,9 @@ Data Structures and Algorithms -- JavaScript Version
 # 10-链表update方法
 # 11-双向链表封装、append方法、toString方法（forwardString、backString）
 # 12-双向链表insert方法
+# 13-双向链表get、indexOf、update方法
+# 14-双向链表removeAt、remove、及其他方法
+# 15-排序算法ArrarList的封装、冒泡算法
+# 16-选择排序
+# 17-插入排序
+# 18-希尔排序
