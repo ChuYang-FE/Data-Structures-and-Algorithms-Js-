@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>集合</title>
+  </head>
+  <body>
+    <script>
+      function Set () {
+        this.items = {};
+
+        //add
+        Set.prototype.add = function (value) {
+          if ( this.has(value) ) {
+            return false;
+          }
+          this.items[value] = value;
+          return true;
+        }
+
+        //has
+        Set.prototype.has = function (value) {
+          return this.items.hasOwnProperty(value);
+        }
+
+        //remove
+        Set.prototype.remove = function (value) {
+          if ( !this.has(value) ) {
+            return false;
+          }
+          delete this.items[value];
+          return true;
+        }
+
+        //clear
+        Set.prototype.clear = function () {
+          this.items = {};
+        }
+
+        //size
+        Set.prototype.size = function () {
+          return Object.keys(this.items).length;
+        }
+
+        //获取集合中所有的值
+        Set.prototype.values = function () {
+          return Object.keys(this.items);
+        }
+      }
+
+      const set = new Set();
+      alert(set.add(1));
+      alert(set.add(1));
+      set.add(2);
+      set.add(-3);
+      alert('当前集合里的值：' + set.values());
+      alert('有2吗？ ' + set.has(2));
+      alert(set.remove(2));
+      alert('移除2后，有2吗？ ' + set.has(2));
+      alert('长度是：' + set.size());
+    </script>
+  </body>
+</html>
