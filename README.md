@@ -19,3 +19,7 @@ Data Structures and Algorithms -- JavaScript Version
 # 16-选择排序
 # 17-插入排序
 # 18-希尔排序
+# 19-快速排序
+# 20-集合类的封装及基本操作的实现
+# 21-集合的并集、交集
+# 期末~~
