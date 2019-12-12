@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>集合差集、子集</title>
+  </head>
+  <body>
+    <script>
+      function Set () {
+        this.items = {};
+
+        //add
+        Set.prototype.add = function (value) {
+          if ( this.has(value) ) {
+            return false;
+          }
+          this.items[value] = value;
+          return true;
+        }
+
+        //has
+        Set.prototype.has = function (value) {
+          return this.items.hasOwnProperty(value);
+        }
+
+        //remove
+        Set.prototype.remove = function (value) {
+          if ( !this.has(value) ) {
+            return false;
+          }
+          delete this.items[value];
+          return true;
+        }
+
+        //clear
+        Set.prototype.clear = function () {
+          this.items = {};
+        }
+
+        //size
+        Set.prototype.size = function () {
+          return Object.keys(this.items).length;
+        }
+
+        //获取集合中所有的值
+        Set.prototype.values = function () {
+          return Object.keys(this.items);
+        }
+
+        //并集
+        Set.prototype.union = function (otherSet) {
+          //集合对象A：this
+          //集合对象B：otherSet
+
+          //创建新集合
+          const unionSet = new Set();
+
+          //把集合A放进新集合
+          const currentValues = this.values();
+          for (let i = 0; i < currentValues.length; i++) {
+            unionSet.add(currentValues[i]);
+          }
+
+          //把集合B添加进新集合（由于已经做防重处理，所以可以直接添加）
+          const otherValues = otherSet.values();
+          for (let i = 0; i < otherValues.length; i++) {
+            unionSet.add(otherValues[i]);
+          }
+
+          return unionSet;
+        }
+        
+        //交集
+        Set.prototype.intersection = function (otherSet) {
+          const unionSet = new Set();       
+          const currentValues = this.values();
+          for (let i = 0; i < currentValues.length; i++) {
+            if (otherSet.has(currentValues[i])) {
+              unionSet.add(currentValues[i])
+            }
+          }
+          return unionSet;
+        }
+
+        //差集
+        Set.prototype.difference = function (otherSet) {
+          const differenceSet = new Set();       
+          const currentValues = this.values();
+          for (let i = 0; i < currentValues.length; i++) {
+            if (!otherSet.has(currentValues[i])) {
+              differenceSet.add(currentValues[i]);
+            }
+          }
+          return differenceSet;
+        }
+
+        //判断是不是子集
+        Set.prototype.isSubsetOf = function (otherSet) {
+          const boolSet = new Set();       
+          const currentValues = this.values();
+          for (let i = 0; i < currentValues.length; i++) {
+            if(!otherSet.has(currentValues[i])) {
+              return false;
+            }
+          }
+          return true;
+        }
+      }
+
+      const setA = new Set();
+      setA.add(1);
+      setA.add(2);
+      setA.add(3);
+      setA.add(666);
+      const setB = new Set();
+      setB.add(3);
+      setB.add(4);
+      setB.add(5);
+      setB.add(666);
+      const differenceSet = setA.difference(setB);
+      alert('差集：' + differenceSet.values());
+      alert('A是B的子集吗：' + setA.isSubsetOf(setB));
+
+      const setC = new Set();
+      setC.add(1);
+      setC.add(2);
+      setC.add(3);
+      setC.add(666);
+      setC.add(777);
+      alert('A是C的子集吗：' + setA.isSubsetOf(setC));
+    </script>
+  </body>
+</html>
