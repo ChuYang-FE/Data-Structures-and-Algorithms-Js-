@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉搜索树</title>
+  </head>
+  <body>
+    <script>
+      function BinarySearchTree() {
+        // 内部节点类
+        function Node(key) {
+          this.key = key;
+          this.left = null;
+          this.right = null;
+        }
+        //属性：根节点
+        this.root = null;
+
+        // 方法
+
+        // 1、插入节点 insert
+        BinarySearchTree.prototype.insert = function(key) {
+          var newNode = new Node(key);
+          // 如果是空树，直接赋值给根节点。
+          if (this.root == null) {
+            this.root = newNode;
+          } else {
+            //否则执行插入操作
+            this.insertNode(this.root, newNode);
+          }
+        };
+        BinarySearchTree.prototype.insertNode = function(node, newNode) {
+          if (newNode.key < node.key) {
+            //向左查找
+            if (node.left == null) {
+              //节点左子树为空，直接插入
+              node.left = newNode;
+            } else {
+              //节点左子树不为空，递归
+              this.insertNode(node.left, newNode);
+            }
+          } else {
+            //向右查找
+            if (node.right == null) {
+              node.right = newNode;
+            } else {
+              this.insertNode(node.right, newNode);
+            }
+          }
+        };
+
+        //2.1、前序遍历
+        BinarySearchTree.prototype.preOrderTraversal = function(handle) {
+          this.preOrderTraversalNode(this.root, handle);
+        };
+
+        BinarySearchTree.prototype.preOrderTraversalNode = function(
+          node,
+          handle
+        ) {
+          if (node !== null) {
+            handle(node.key);
+            this.preOrderTraversalNode(node.left, handle);
+            this.preOrderTraversalNode(node.right, handle);
+          }
+        };
+
+        //2.2、中序遍历
+        BinarySearchTree.prototype.midOrderTraversal = function(handle) {
+          this.midOrderTraversalNode(this.root, handle);
+        };
+
+        BinarySearchTree.prototype.midOrderTraversalNode = function(
+          node,
+          handle
+        ) {
+          if (node !== null) {
+            this.midOrderTraversalNode(node.left, handle);
+            handle(node.key);
+            this.midOrderTraversalNode(node.right, handle);
+          }
+        };
+
+        //2.3、后序遍历
+        BinarySearchTree.prototype.postOrderTraversal = function(handle) {
+          this.postOrderTraversalNode(this.root, handle);
+        };
+
+        BinarySearchTree.prototype.postOrderTraversalNode = function(
+          node,
+          handle
+        ) {
+          if (node !== null) {
+            this.postOrderTraversalNode(node.left, handle);
+            this.postOrderTraversalNode(node.right, handle);
+            handle(node.key);
+          }
+        };
+      }
+      // 测试代码
+      var bst = new BinarySearchTree();
+
+      // 插入数据
+      bst.insert(11);
+      bst.insert(7);
+      bst.insert(15);
+      bst.insert(5);
+      bst.insert(3);
+      bst.insert(9);
+      bst.insert(8);
+      bst.insert(10);
+      bst.insert(13);
+      bst.insert(12);
+      bst.insert(14);
+      bst.insert(20);
+      bst.insert(18);
+      bst.insert(25);
+      bst.insert(6);
+      var handle = function(key) {
+        console.log(key);
+      }
+      bst.preOrderTraversal(handle);
+      console.log(' ')
+      bst.midOrderTraversal(handle);
+      console.log(' ')
+      bst.postOrderTraversal(handle);
+    </script>
+  </body>
+</html>
