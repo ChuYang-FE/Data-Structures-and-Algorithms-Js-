@@ -1,23 +1,26 @@
 <script>
   function findNum(arr, targetSum) {
     let left = 0;
-    let right = arr.length-1;
+    let right = arr.length - 1;
     let currentSum;
     console.log(`原arr：${arr}`);
-    arr.sort((a,b) => a-b);  //进行升序排序。
+    arr.sort((a, b) => a - b); //进行升序排序。
     console.log(`排序后arr：${arr}`);
 
-    for(left, right;left < right;) {
+    for (left, right; left < right;) {
       currentSum = arr[left] + arr[right];
-      if(currentSum == targetSum){
-          console.log(arr[left], arr[right]);
-          left++;
-          right--;
-      } else if(currentSum < targetSum){   //如果当前值比目标值小，则左边界++
-          left++; 
-      } else if(currentSum > targetSum){  //如果当前值比目标值大，则右边界--
-          right--;
+      if (currentSum == targetSum) {
+        console.log(arr[left], arr[right]);
+        right--;
+        left++;
+        if (left == right) return;  //如果经过上述操作后下标一致，则不视为无匹配。
+      } else if (currentSum < targetSum) { //如果当前值比目标值小，则左边界++
+        left++;
+      } else if (currentSum > targetSum) { //如果当前值比目标值大，则右边界--
+        right--;
       }
+      if (left == right) return 'No Match';
     }
+
   }
 </script>
