@@ -25,3 +25,4 @@ Data Structures and Algorithms -- JavaScript Version
 # 22-集合的差集和、子集的实现
 # testing my MacBook pro  SSH
 # 23-二叉搜索树
+# 24-寻找满足条件的两个数
