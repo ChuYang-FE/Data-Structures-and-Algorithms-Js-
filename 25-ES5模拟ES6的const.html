@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25-ES5模拟ES6的const</title>
+</head>
+<body>
+  <script>
+    function myConst(name, value) {
+      window.name = value;
+      Object.defineProperty(window, name, { //劫持window对象
+        enumerable: false, //不可枚举
+        configurable: false, //不可删除
+        get: () => {
+          return value;
+        },
+        set: (name) => {
+          if(name !== value) {
+            throw new TypeError("常量不可变更！");
+          } else {
+            return value;
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>

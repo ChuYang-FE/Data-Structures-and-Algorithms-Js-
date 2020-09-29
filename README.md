@@ -26,3 +26,4 @@ Data Structures and Algorithms -- JavaScript Version
 # testing my MacBook pro  SSH
 # 23-二叉搜索树
 # 24-寻找满足条件的两个数
+# 25-ES5模拟ES6的const
